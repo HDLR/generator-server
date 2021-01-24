@@ -1,25 +1,21 @@
-package ${package}.${project}.service.modules.service;
+package ${package}.${moduleName}.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.seaboxdata.${project}.service.modules.model.${className};
-import com.seaboxdata.commons.core.util.api.PageUtils;
+import ${package}.${moduleName}.model.${className};
+import com.central.common.model.PageResult;
+import ${package}.common.service.ISuperService;
+
 import java.util.Map;
 
 /**
  * ${comments}
- *
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
-public interface ${className}Service extends IService<${className}> {
-
-    PageUtils queryPage(Map<String, Object> params);
-
-    ${className} queryById(Long id);
-
-    Boolean insert(${className} ${classname});
-
-    Boolean update(${className} ${classname});
+public interface I${className}Service extends ISuperService<${className}> {
+    /**
+     * 列表
+     * @param params
+     * @return
+     */
+    PageResult<${className}> findList(Map<String, Object> params);
 }
-

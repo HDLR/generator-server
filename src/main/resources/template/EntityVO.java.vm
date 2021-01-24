@@ -1,48 +1,31 @@
-package ${package}.${project}.modules.entity;
+package ${package}.${moduleName}.api.vo;
 
-import com.baomidou.mybatisplus.annotation.*;
-#if(${hasBigDecimal})
-import java.math.BigDecimal;
-#end
-import java.io.Serializable;
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.ToString;
-import java.time.LocalDateTime;
+	#if(${hasBigDecimal})
+	import java.math.BigDecimal;
+	#end
 import java.util.Date;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 
 /**
  * ${comments}
- *
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 public class ${className}VO implements Serializable {
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID=1L;
 
 #foreach ($column in $columns)
-	/**
-	 * $column.comments
-	 */
+	#if($column.comments != "")
 	@ApiModelProperty(value = "${column.comments}")
-	#if($column.columnName == $pk.columnName)
+	#end
 	private $column.attrType $column.attrname;
-	#elseif($column.columnName == "create_tm")
-	private Date $column.attrname;
-	#elseif($column.columnName == "modify_tm")
-	private Date $column.attrname;
-	#else
-private $column.attrType $column.attrname;
-#end
 
 #end
-
 }

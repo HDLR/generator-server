@@ -1,47 +1,36 @@
-package ${package}.${project}.modules.service.impl;
+package ${package}.${moduleName}.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.seaboxdata.${project}.service.modules.dao.${className}Dao;
-import com.seaboxdata.${project}.service.modules.service.${className}Service;
-import com.seaboxdata.commons.core.util.api.PageUtils;
-import com.seaboxdata.commons.core.util.api.Query;
 import org.springframework.stereotype.Service;
+import com.central.common.model.PageResult;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${package}.common.service.impl.SuperServiceImpl;
+
+import java.util.List;
 import java.util.Map;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springframework.beans.BeanUtils;
-import com.seaboxdata.${project}.service.modules.model.${className};
+import org.apache.commons.collections4.MapUtils;
+import lombok.extern.slf4j.Slf4j;
 
+import ${package}.${moduleName}.model.${className};
+import ${package}.${moduleName}.mapper.${className}Mapper;
+import ${package}.${moduleName}.service.I${className}Service;
 
-@Service("${classname}Service")
-public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${className}> implements ${className}Service {
-
+/**
+ * ${comments}
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Slf4j
+@Service
+public class ${className}ServiceImpl extends SuperServiceImpl<${className}Mapper, ${className}> implements I${className}Service {
+    /**
+     * 列表
+     * @param params
+     * @return
+     */
     @Override
-    public PageUtils queryPage(Map<String, Object> params) {
-        IPage<${className}> page = this.page(
-                new Query<${className}>().getPage(params),
-                new QueryWrapper<>()
-        );
-
-        return new PageUtils(page);
+    public PageResult<${className}> findList(Map<String, Object> params){
+        Page<${className}> page = new Page<>(MapUtils.getInteger(params, "page"), MapUtils.getInteger(params, "limit"));
+        List<${className}> list  =  baseMapper.findList(page, params);
+        return PageResult.<${className}>builder().data(list).code(0).count(page.getTotal()).build();
     }
-
-    @Override
-    public ${className} queryById(Long id) {
-        ${className} ${classname} = this.getById(id);
-        return ${classname};
-    }
-
-    @Override
-    public Boolean insert(${className} ${classname}) {
-        this.save(${classname});
-        return true;
-    }
-
-    @Override
-    public Boolean update(${className} ${classname}) {
-        this.updateById(${classname});
-        return true;
-    }
-
 }

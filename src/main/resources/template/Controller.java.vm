@@ -1,84 +1,64 @@
-package ${package}.${project}.modules.controller;
+package ${package}.${moduleName}.controller;
 
-import java.util.Arrays;
 import java.util.Map;
-import com.seaboxdata.${project}.api.controller.I${className}Controller;
-import com.seaboxdata.${project}.api.vo.${className}VO;
-import com.seaboxdata.${project}.service.modules.model.${className};
-import com.seaboxdata.${project}.service.modules.service.${className}Service;
-import com.seaboxdata.commons.core.util.api.PageUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.BeanUtils;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+
+import ${package}.${moduleName}.api.model.${className};
+import ${package}.${moduleName}.service.I${className}Service;
+import com.central.common.model.PageResult;
+import com.central.common.model.Result;
 
 /**
  * ${comments}
  *
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
+@Slf4j
 @RestController
-public class ${className}Controller implements I${className}Controller{
-
+public class ${className}Controller implements I${className}Controller {
     @Autowired
-    private ${className}Service ${classname}Service;
+    private I${className}Service ${classname}Service;
 
     /**
      * 列表
      */
     @Override
-    public PageUtils list(@RequestParam Map<String, Object> params){
-        PageUtils page = ${classname}Service.queryPage(params);
-        return page;
-    }
-
-
-#if(${pk})
-    /**
-     * 信息
-     */
-    @Override
-    public ${className}VO info(@PathVariable("id") Long id){
-        ${className} ${classname} = ${classname}Service.queryById(id);
-        ${className}VO ${classname}VO = new ${className}VO();
-        BeanUtils.copyProperties(${classname}, ${classname}VO);
-        return ${classname}VO;
-    }
-#end
-
-    /**
-     * 保存
-     */
-    @Override
-    public Boolean save(@RequestBody ${className}VO ${classname}VO){
-        ${className} ${classname} = new ${className}();
-        BeanUtils.copyProperties(${classname}VO, ${classname});
-        return ${classname}Service.insert(${classname});
+    public PageResult list(@RequestParam Map<String, Object> params) {
+        return ${classname}Service.findList(params);
     }
 
     /**
-     * 修改
+     * 查询
      */
     @Override
-    public Boolean update(@RequestBody ${className}VO ${classname}VO){
-        ${className} ${classname} = new ${className}();
-        BeanUtils.copyProperties(${classname}VO, ${classname});
-        return ${classname}Service.update(${classname});
+    public Result findUserById(@PathVariable Long ${pk.attrname}) {
+        ${className} model = ${classname}Service.getById(${pk.attrname});
+        return Result.succeed(model, "查询成功");
     }
 
-#if(${pk})
+    /**
+     * 新增or更新
+     */
+    @Override
+    public Result save(@RequestBody ${className} ${classname}) {
+            ${classname}Service.saveOrUpdate(${classname});
+        return Result.succeed("保存成功");
+    }
+
     /**
      * 删除
      */
     @Override
-    public Boolean delete(@RequestBody Long[] ids){
-        return ${classname}Service.removeByIds(Arrays.asList(ids));
+    public Result delete(@PathVariable Long ${pk.attrname}) {
+            ${classname}Service.removeById(${pk.attrname});
+        return Result.succeed("删除成功");
     }
-#end
-
 }
