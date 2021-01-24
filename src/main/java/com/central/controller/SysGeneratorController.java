@@ -1,11 +1,3 @@
-/**
- * Copyright (c) 2018 人人开源 All rights reserved.
- *
- * https://www.dfjinxin.io
- *
- * 版权所有，侵权必究！
- */
-
 package com.central.controller;
 
 import com.central.service.SysGeneratorService;
@@ -53,7 +45,7 @@ public class SysGeneratorController {
 		byte[] data = sysGeneratorService.generatorCode(tables.split(","));
 		
 		response.reset();  
-        response.setHeader("Content-Disposition", "attachment; filename=\"dfjinxin.zip\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"generator.zip\"");
         response.addHeader("Content-Length", "" + data.length);  
         response.setContentType("application/octet-stream; charset=UTF-8");  
   

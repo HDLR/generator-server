@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 import ${package}.${moduleName}.api.model.${className};
+import ${package}.${moduleName}.api.controller.I${className}Controller;
 import ${package}.${moduleName}.service.I${className}Service;
 import com.central.common.model.PageResult;
 import com.central.common.model.Result;
@@ -35,6 +36,7 @@ public class ${className}Controller implements I${className}Controller {
         return ${classname}Service.findList(params);
     }
 
+#if(${pk})
     /**
      * 查询
      */
@@ -43,6 +45,7 @@ public class ${className}Controller implements I${className}Controller {
         ${className} model = ${classname}Service.getById(${pk.attrname});
         return Result.succeed(model, "查询成功");
     }
+#end
 
     /**
      * 新增or更新
@@ -53,6 +56,7 @@ public class ${className}Controller implements I${className}Controller {
         return Result.succeed("保存成功");
     }
 
+#if(${pk})
     /**
      * 删除
      */
@@ -61,4 +65,5 @@ public class ${className}Controller implements I${className}Controller {
             ${classname}Service.removeById(${pk.attrname});
         return Result.succeed("删除成功");
     }
+#end
 }

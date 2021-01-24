@@ -1,11 +1,3 @@
-/**
- * Copyright (c) 2018 人人开源 All rights reserved.
- *
- * https://www.dfjinxin.io
- *
- * 版权所有，侵权必究！
- */
-
 package com.central.config;
 
 import com.central.dao.*;
@@ -23,7 +15,7 @@ import org.springframework.context.annotation.Primary;
  */
 @Configuration
 public class DbConfig {
-    @Value("${dfjinxin.database: mysql}")
+    @Value("${code.database: mysql}")
     private String database;
     @Autowired
     private MySQLGeneratorDao mySQLGeneratorDao;

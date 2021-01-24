@@ -31,12 +31,14 @@ public class I${className}Controller {
     @GetMapping
     PageResult list(@RequestParam Map<String, Object> params)
 
+#if(${pk})
     /**
      * 查询
      */
     @ApiOperation(value = "查询")
     @GetMapping("/${moduleName}/{${pk.attrname}}")
     Result findUserById(@PathVariable Long ${pk.attrname})
+#end
 
     /**
      * 新增or更新
@@ -45,10 +47,12 @@ public class I${className}Controller {
     @PostMapping("/${moduleName}")
     Result save(@RequestBody ${className} ${classname})
 
+#if(${pk})
     /**
      * 删除
      */
     @ApiOperation(value = "删除")
     @DeleteMapping("/${moduleName}/{id}")
     Result delete(@PathVariable Long ${pk.attrname})
+#end
 }

@@ -101,7 +101,7 @@ public class GenUtils {
         prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader" );
         Velocity.init(prop);
         String mainPath = config.getString("mainPath" );
-        mainPath = StringUtils.isBlank(mainPath) ? "com.seaboxdata.modules" : mainPath;
+        mainPath = StringUtils.isBlank(mainPath) ? "com.central" : mainPath;
 
         //封装模板数据
         Map<String, Object> map = new HashMap<>();
@@ -137,6 +137,7 @@ public class GenUtils {
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
             } catch (Exception e) {
+                e.printStackTrace();
                 throw new RRException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
             }
         }
@@ -202,6 +203,10 @@ public class GenUtils {
 
         if (template.contains("Mapper.xml.vm" )) {
             return "main" + File.separator + "resources" + File.separator  + "mapper" + File.separator + className + "Mapper.xml";
+        }
+
+        if (template.contains("IController.java.vm" )) {
+            return packagePath + "controller" + File.separator + "I" + className + "Controller.java";
         }
 
         if (template.contains("Controller.java.vm" )) {
