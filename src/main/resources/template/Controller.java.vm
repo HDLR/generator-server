@@ -40,7 +40,7 @@ public class ${className}Controller {
             @ApiImplicitParam(name = "limit", value = "分页结束位置", required = true, dataType = "Integer")
     })
     @GetMapping("/${pathName}")
-    public PageResult list(@RequestParam Map<String, Object> params) {
+    public PageResult<${className}> list(@RequestParam Map<String, Object> params) {
         return ${classname}Service.findList(params);
     }
 
@@ -50,7 +50,7 @@ public class ${className}Controller {
      */
     @ApiOperation(value = "查询")
     @GetMapping("/${pathName}/{${pk.attrname}}")
-    public Result findUserById(@PathVariable Long ${pk.attrname}) {
+    public Result<${className}> findUserById(@PathVariable Long ${pk.attrname}) {
         ${className} model = ${classname}Service.getById(${pk.attrname});
         return Result.succeed(model, "查询成功");
     }
