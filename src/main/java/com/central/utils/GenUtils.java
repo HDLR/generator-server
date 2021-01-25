@@ -182,7 +182,7 @@ public class GenUtils {
         }
 
         if (template.contains("Entity.java.vm" )) {
-            return packagePath + "entity" + File.separator + className + ".java";
+            return packagePath + "model" + File.separator + className + ".java";
         }
 
         if (template.contains("EntityVO.java.vm" )) {
