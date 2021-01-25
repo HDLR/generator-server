@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.controller;
+package ${package}.${project}.controller;
 
 import java.util.Map;
 
@@ -10,9 +10,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
-import ${package}.${moduleName}.api.model.${className};
-import ${package}.${moduleName}.api.controller.I${className}Controller;
-import ${package}.${moduleName}.service.I${className}Service;
+import ${package}.${project}.service.model.${className};
+import ${package}.${project}.service.service.${className}Service;
 import com.central.common.model.PageResult;
 import com.central.common.model.Result;
 
@@ -24,14 +23,22 @@ import com.central.common.model.Result;
  */
 @Slf4j
 @RestController
-public class ${className}Controller implements I${className}Controller {
+public class ${className}Controller {
     @Autowired
-    private I${className}Service ${classname}Service;
+    private ${className}Service ${classname}Service;
 
     /**
      * 列表
      */
-    @Override
+    /**
+     * 列表
+     */
+    @ApiOperation(value = "查询列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "分页起始位置", required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "limit", value = "分页结束位置", required = true, dataType = "Integer")
+    })
+    @GetMapping("/${pathName}")
     public PageResult list(@RequestParam Map<String, Object> params) {
         return ${classname}Service.findList(params);
     }
@@ -40,7 +47,7 @@ public class ${className}Controller implements I${className}Controller {
     /**
      * 查询
      */
-    @Override
+    @GetMapping("/${pathName}/{${pk.attrname}}")
     public Result findUserById(@PathVariable Long ${pk.attrname}) {
         ${className} model = ${classname}Service.getById(${pk.attrname});
         return Result.succeed(model, "查询成功");
@@ -50,7 +57,7 @@ public class ${className}Controller implements I${className}Controller {
     /**
      * 新增or更新
      */
-    @Override
+    @PostMapping("/${pathName}")
     public Result save(@RequestBody ${className} ${classname}) {
             ${classname}Service.saveOrUpdate(${classname});
         return Result.succeed("保存成功");
@@ -60,7 +67,7 @@ public class ${className}Controller implements I${className}Controller {
     /**
      * 删除
      */
-    @Override
+    @DeleteMapping("/${pathName}/{id}")
     public Result delete(@PathVariable Long ${pk.attrname}) {
             ${classname}Service.removeById(${pk.attrname});
         return Result.succeed("删除成功");

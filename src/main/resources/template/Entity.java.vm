@@ -1,14 +1,13 @@
-package ${package}.${moduleName}.model;
+package ${package}.${project}.model;
 
 import ${package}.common.model.SuperEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.EqualsAndHashCode;
-	#if(${hasBigDecimal})
-	import java.math.BigDecimal;
-	#end
+import java.math.BigDecimal;
 import java.util.Date;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * ${comments}
@@ -20,13 +19,11 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @TableName("${tableName}")
 public class ${className} extends SuperEntity {
-private static final long serialVersionUID=1L;
 
+	private static final long serialVersionUID=1L;
 #foreach ($column in $columns)
-	#if($column.comments != "")
-	@ApiModelProperty(value = "${column.comments}")
-	#end
 	#if($column.columnName != $pk.columnName && $column.columnName != "createTime" && $column.columnName != "updateTime")
+@ApiModelProperty(value = "${column.comments}")
 	private $column.attrType $column.attrname;
 	#end
 

@@ -1,6 +1,6 @@
-package ${package}.${moduleName}.mapper;
+package ${package}.${project}.mapper;
 
-import ${package}.${moduleName}.model.${className};
+import ${package}.${project}.service.model.${className};
 import com.central.db.mapper.SuperMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;

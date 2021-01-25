@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.service.impl;
+package ${package}.${project}.service.impl;
 
 import org.springframework.stereotype.Service;
 import com.central.common.model.PageResult;
@@ -10,9 +10,9 @@ import java.util.Map;
 import org.apache.commons.collections4.MapUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import ${package}.${moduleName}.model.${className};
-import ${package}.${moduleName}.mapper.${className}Mapper;
-import ${package}.${moduleName}.service.I${className}Service;
+import ${package}.${project}.service.model.${className};
+import ${package}.${project}.service.mapper.${className}Mapper;
+import ${package}.${project}.service.service.${className}Service;
 
 /**
  * ${comments}
@@ -21,7 +21,7 @@ import ${package}.${moduleName}.service.I${className}Service;
  */
 @Slf4j
 @Service
-public class ${className}ServiceImpl extends SuperServiceImpl<${className}Mapper, ${className}> implements I${className}Service {
+public class ${className}ServiceImpl extends SuperServiceImpl<${className}Mapper, ${className}> implements ${className}Service {
     /**
      * 列表
      * @param params

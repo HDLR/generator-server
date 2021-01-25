@@ -1,6 +1,6 @@
-package ${package}.${moduleName}.service;
+package ${package}.${project}.service;
 
-import ${package}.${moduleName}.model.${className};
+import ${package}.${project}.service.model.${className};
 import com.central.common.model.PageResult;
 import ${package}.common.service.ISuperService;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  * @author ${author}
  * @date ${datetime}
  */
-public interface I${className}Service extends ISuperService<${className}> {
+public interface ${className}Service extends ISuperService<${className}> {
     /**
      * 列表
      * @param params
