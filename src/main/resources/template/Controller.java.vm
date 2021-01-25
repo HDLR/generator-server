@@ -48,6 +48,7 @@ public class ${className}Controller {
     /**
      * 查询
      */
+    @ApiOperation(value = "查询")
     @GetMapping("/${pathName}/{${pk.attrname}}")
     public Result findUserById(@PathVariable Long ${pk.attrname}) {
         ${className} model = ${classname}Service.getById(${pk.attrname});
@@ -58,6 +59,7 @@ public class ${className}Controller {
     /**
      * 新增or更新
      */
+    @ApiOperation(value = "新增or更新")
     @PostMapping("/${pathName}")
     public Result save(@RequestBody ${className} ${classname}) {
             ${classname}Service.saveOrUpdate(${classname});
@@ -68,6 +70,7 @@ public class ${className}Controller {
     /**
      * 删除
      */
+    @ApiOperation(value = "删除")
     @DeleteMapping("/${pathName}/{id}")
     public Result delete(@PathVariable Long ${pk.attrname}) {
             ${classname}Service.removeById(${pk.attrname});
