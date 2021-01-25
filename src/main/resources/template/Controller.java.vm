@@ -22,6 +22,7 @@ import com.central.common.model.Result;
  * @date ${datetime}
  */
 @Slf4j
+@Api(tags = "${comments}接口文档api")
 @RestController
 public class ${className}Controller {
     @Autowired
